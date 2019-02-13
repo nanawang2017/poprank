@@ -1,0 +1,42 @@
+"""
+基于流行度的算法
+可以按照一个项目的流行度进行排序，将最流行的项目推荐给用户。比如在微博推荐中，将最为流行的大V用户推荐给普通用户。
+在本实验中，指的是为用户推荐热门Item。
+即总体思路为：求每个Item的流行度，然后对Item进行排序，然后对用户进行推荐（那么，所有用户的推荐列表是相同的）
+每个Item流行度的度量方式：
+1、每个Item的评分均值（该Item所有评分/评分次数）
+2、每个Item被评分的次数（分母是所有 Item被评分此数之和）
+
+总体思路是：构造构造字典{Item：【rank】}
+该Item的评分就是一Item为key的value（也就是列表）求和，次数就是列表的长度
+"""
+
+
+def load_data(train_file):
+    """
+
+    :param train_file: 传入文件
+    :return: Item_rank字典
+    """
+    with open(train_file, 'r')as f:
+        Item_rank = {}
+        lines = f.readlines()
+        for line in lines:
+            item_id = line.split(',')[1]
+            rank = line.split(',')[2]
+            item_ranklist = []
+            if item_id not in Item_rank.keys():
+                Item_rank[item_id] = item_ranklist
+            item_ranklist.append(rank)
+    return Item_rank
+
+
+def poprank():
+    pass
+
+
+if __name__ == '__main__':
+    train_file="/Users/nanawang/Downloads/poprank/1mR5.txt"
+    Item_rank={}
+    Item_rank=load_data(train_file)
+    print(len(Item_rank['1917']))
